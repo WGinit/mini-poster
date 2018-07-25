@@ -30,7 +30,7 @@
 
 ## 参数对应格式
 
-```json
+```javascript
 dataList: {
     canvasData:{
       type: 'image',
