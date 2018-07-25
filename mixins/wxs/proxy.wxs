@@ -1,0 +1,11 @@
+module.exports = {
+  userAvatar: userAvatar
+};
+
+/*
+ * 头像代理，如果没有头像则返回默认头像
+ */
+function userAvatar(avatar) {
+  if (!avatar) return 'https://avatars0.githubusercontent.com/u/28439412?s=460&v=4'
+  return avatar;
+}

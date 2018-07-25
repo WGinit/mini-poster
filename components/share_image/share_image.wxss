@@ -1,0 +1,25 @@
+.share-box{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.share-content {
+  width: 100%;
+  height: 100%;
+}
+.draw-item {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.draw-item image, .draw-item .text {
+  position: absolute
+}
+.share-btn button {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 10rpx;
+  font-size: 36rpx;
+  color: #7D73C3;
+  text-align: center
+}

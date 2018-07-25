@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class="index-wraper">
+  <view class="content">
+    <share-image 
+      drawDataList="{{dataList}}">
+    </share-image>
+  </view>
+</view>
