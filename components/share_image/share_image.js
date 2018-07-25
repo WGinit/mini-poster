@@ -55,10 +55,10 @@ Component({
       let { boxWidth, boxHeight, canvasData, drawList} = this.data
       canvasData = value.canvasData || ''
       drawList = value.content || ''
-      boxWidth = value.canvasData.width
-      boxHeight = value.canvasData.height
-      canvasData.width = parseInt(canvasData.width / 2)
-      canvasData.height = parseInt(canvasData.height / 2)
+      boxWidth = value.canvasData.width || 750
+      boxHeight = value.canvasData.height || 1334
+      canvasData.width = parseInt(canvasData.width / 2) || 375
+      canvasData.height = parseInt(canvasData.height / 2) || 667
       this.setData({
         boxWidth,
         boxHeight,
@@ -84,15 +84,15 @@ Component({
           }
         })
       }
-      canvasData.width = parseInt(canvasData.width * 2)
-      canvasData.height = parseInt(canvasData.height * 2)
+      canvasData.width = parseInt(canvasData.width * 2) || 750
+      canvasData.height = parseInt(canvasData.height * 2) || 1334
       imageList.unshift(canvasData)
       // 下载图片到本地后
       for (let i in imageList) {
-        imageList[i].left = parseInt(imageList[i].left / 2)
-        imageList[i].top = parseInt(imageList[i].top / 2) 
-        imageList[i].width = parseInt(imageList[i].width / 2)
-        imageList[i].height = parseInt(imageList[i].height / 2)
+        imageList[i].left = parseInt(imageList[i].left / 2) || 0
+        imageList[i].top = parseInt(imageList[i].top / 2) || 0
+        imageList[i].width = parseInt(imageList[i].width / 2) || 100
+        imageList[i].height = parseInt(imageList[i].height / 2) || 100
         that.downLoadImg(imageList[i].url, imageList[i].comment).then( res => {
           imageList[i].url = res
         }, err => {
@@ -100,11 +100,11 @@ Component({
         })
       }
       for (let i in textList) {
-        textList[i].left = parseInt(textList[i].left / 2)
-        textList[i].top = parseInt(textList[i].top / 2)
-        textList[i].fontSize = parseInt(textList[i].fontSize / 2)
-        textList[i].lineHeight = parseInt(textList[i].lineHeight / 2)
-        textList[i].maxWidth = parseInt(textList[i].maxWidth / 2)
+        textList[i].left = parseInt(textList[i].left / 2) || 0
+        textList[i].top = parseInt(textList[i].top / 2) || 0
+        textList[i].fontSize = parseInt(textList[i].fontSize / 2) || 16
+        textList[i].lineHeight = parseInt(textList[i].lineHeight / 2) || 16
+        textList[i].maxWidth = parseInt(textList[i].maxWidth / 2) || 300
       }
       that.data.drawData = [...imageList, ...textList]
       // 进行绘制
@@ -143,7 +143,7 @@ Component({
     },
     drawImg (params) {
       let that = this
-      const { url = '', top = 0, left = 0, width = 0, height = 0, shape='square'} = params
+      const { url = '', top = 0, left = 0, width = 50, height = 50, shape='square'} = params
       if (params.shape == 'circle') {
         that.circleImg(params)
       }
@@ -153,7 +153,7 @@ Component({
     },
     // 绘制文字
     fillText(params) {
-      const { fontSize, color, content, left = 0, top = 0, textAlign = 'center', lineHeight = 25, maxLineNum = 2, maxWidth, weight ='normal'} = params
+      const { fontSize = 16, color = '#FFFFFF', content, left = 0, top = 0, textAlign = 'center', lineHeight = 16, maxLineNum = 2, maxWidth = 300, weight ='normal'} = params
       let arrText = content.split('')
       let line = '', _top = top, lineNum = 1, testLine = ''
       this.ctx.setFillStyle(color)
