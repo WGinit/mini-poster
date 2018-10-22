@@ -19,8 +19,6 @@ Component({
       observer(value) {
         if(JSON.stringify(value) != "{}") {
           this.initData(value)
-        } else {
-          util.showModal('温馨提示', '请传入绘制参数', false)
         }
       }
     }
@@ -71,6 +69,9 @@ Component({
       let { canvasData, drawList, customData } = that.data
       let imageList = customData.imageList
       let textList = customData.textList
+      if (!imageList.length) {
+        return
+      }
       // 分离图片和文字
       if (drawList.length) {
         drawList.forEach((item, index) => {
