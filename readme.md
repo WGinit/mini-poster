@@ -73,7 +73,7 @@ canvas相关参数配置
 | 参数    | 类型   |  默认值  |  必填  |  说明 |
 | :----: | :-----:  | :----:  |  :--: |  :---: |
 | type   | String |   image  |  是  |  文件类型， 这里为背景图，默认image |
-| url    |   String   |  ''  |  是   |  网络图片地址  |
+| url    |   String   |  ''  |  是   |  图片地址  |
 | top    |  Number  |  0  |  否   |  图像的左上角在可视区域上 Y 轴的位置, 单位px  |
 | left    | Number   |  0  |  否   |    图像的左上角在可视区域上 X 轴的位置, 单位px  |
 | width    |  Number  |  750  |  否  |   画布的宽度, 单位px  |
@@ -89,7 +89,7 @@ canvas相关参数配置
 | :---: | :---: | :---:| :----: | :---: |
 | type  | String  | ''  | 是  |   绘制的类型，可选image和text  |
 | shape  | String  | 'square'  | 否  |   绘制图片的形状, square 方形， circle 圆形  |
-| url  | String  | ''  |  - |   图片的网络地址， type为image必填  |
+| url  | String  | ''  |  - |   图片地址， type为image必填  |
 | content  | String  | ''  | -   |  文本内容， type为text必填  |
 | top  | Number  | 0  |  否  |  图像的左上角在目标画布上 Y 轴的位置, 单位px  |
 | left | NUmber  |  0 |  否  |   图像的左上角在目标画布上 X 轴的位置, 单位px|
