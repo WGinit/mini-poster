@@ -3,7 +3,7 @@
  * author: Wginit
  * created Time: 2018-7-25
  * Email: wginit@yeah.net
- * 
+ *
  */
 const app = getApp();
 const { util } = app
@@ -39,7 +39,7 @@ Component({
       textList: []
     }
   },
-  
+
   ready () {
    this.ctx = wx.createCanvasContext('image', this)
    this.drawImgInit()
@@ -69,9 +69,6 @@ Component({
       let { canvasData, drawList, customData } = that.data
       let imageList = customData.imageList
       let textList = customData.textList
-      if (!imageList.length) {
-        return
-      }
       // 分离图片和文字
       if (drawList.length) {
         drawList.forEach((item, index) => {
@@ -94,10 +91,13 @@ Component({
         imageList[i].top = parseInt(imageList[i].top / 2) || 0
         imageList[i].width = parseInt(imageList[i].width / 2) || 100
         imageList[i].height = parseInt(imageList[i].height / 2) || 100
-        that.downLoadImg(imageList[i].url, imageList[i].comment).then( res => {
+        that.downLoadImg(imageList[i] && imageList[i].url, imageList[i].comment).then(res => {
           imageList[i].url = res
         }, err => {
-          util.showModal('错误提示', err, false)
+          util.hideToast()
+          if (err) {
+            util.showModal('错误提示', err, false)
+          }
         })
       }
       for (let i in textList) {
@@ -113,33 +113,36 @@ Component({
     },
     downLoadImg (imgurl, msg) {
       return new Promise((resolve, reject) => {
-        let that = this
-        util.showToast( msg + '下载中...')
-        wx.downloadFile({
-          url: imgurl,
-          complete: function(res) {
-            if (res.statusCode === 200) {
-              util.hideToast()
-              resolve(res.tempFilePath)
-            } else {
-              util.hideToast()
-              reject(new Error('downloadFail fail'))
+        if (!imgurl) {
+          reject()
+        } else {
+          util.showToast(msg + '下载中...')
+          wx.downloadFile({
+            url: imgurl,
+            complete: function (res) {
+              if (res.statusCode === 200) {
+                util.hideToast()
+                resolve(res.tempFilePath)
+              } else {
+                util.hideToast()
+                reject(new Error('downloadFail fail'))
+              }
             }
-          }
-        })
+          })
+        }
       })
     },
     // 裁剪圆形头像
-    circleImg(params) {  
+    circleImg(params) {
       const { url, left, top, width} = params
       let r = parseInt(width / 2) // 半径
       this.ctx.save()
-      let d =2 * r  
-      let cx = left + r 
-      let cy = top + r 
+      let d =2 * r
+      let cx = left + r
+      let cy = top + r
       this.ctx.arc(cx, cy, r, 0, 2 * Math.PI)
       this.ctx.clip()
-      this.ctx.drawImage(url, left, top, d, d)  
+      this.ctx.drawImage(url, left, top, d, d)
       this.ctx.restore()
     },
     drawImg (params) {
