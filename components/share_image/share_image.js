@@ -33,7 +33,6 @@ Component({
     boxWidth: '',
     boxHeight: '',
     drawList: [],
-    drawData: [],
     customData: {
       imageList: [],
       textList: []
@@ -64,7 +63,7 @@ Component({
         drawList
       })
     },
-    drawImgInit() {
+    async drawImgInit() {
       let that= this
       let { canvasData, drawList, customData } = that.data
       let imageList = customData.imageList
@@ -91,14 +90,13 @@ Component({
         imageList[i].top = parseInt(imageList[i].top / 2) || 0
         imageList[i].width = parseInt(imageList[i].width / 2) || 100
         imageList[i].height = parseInt(imageList[i].height / 2) || 100
-        that.downLoadImg(imageList[i] && imageList[i].url, imageList[i].comment).then(res => {
-          imageList[i].url = res
-        }, err => {
-          util.hideToast()
-          if (err) {
-            util.showModal('错误提示', err, false)
-          }
+        const res = await that.downLoadImg(imageList[i] && imageList[i].url, imageList[i].comment).catch(err => {
+            util.hideToast()
+            if (err) {
+              util.showModal('错误提示', err, false)
+            }
         })
+        imageList[i].url = res
       }
       for (let i in textList) {
         textList[i].left = parseInt(textList[i].left / 2) || 0
@@ -107,24 +105,21 @@ Component({
         textList[i].lineHeight = parseInt(textList[i].lineHeight / 2) || 16
         textList[i].maxWidth = parseInt(textList[i].maxWidth / 2) || 300
       }
-      that.data.drawData = [...imageList, ...textList]
+      const drawData = [...imageList, ...textList]
       // 进行绘制
-      that.beginDraw()
+      that.beginDraw(drawData)
     },
     downLoadImg (imgurl, msg) {
       return new Promise((resolve, reject) => {
         if (!imgurl) {
           reject()
         } else {
-          util.showToast(msg + '下载中...')
           wx.downloadFile({
             url: imgurl,
             complete: function (res) {
               if (res.statusCode === 200) {
-                util.hideToast()
                 resolve(res.tempFilePath)
               } else {
-                util.hideToast()
                 reject(new Error('downloadFail fail'))
               }
             }
@@ -184,9 +179,8 @@ Component({
       this.ctx.fillText(testLine, left, _top, maxWidth)
     },
     // 开始绘制
-    beginDraw(){
+    beginDraw(drawData){
       let that = this
-      let { drawData, customData } = that.data
       let imgIndex = 0
       for (let i in drawData) {
         switch (drawData[i].type) {

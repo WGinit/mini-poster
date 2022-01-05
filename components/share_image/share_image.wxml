@@ -1,7 +1,7 @@
 <wxs src="../../mixins/wxs/proxy.wxs" module="proxywxs" />
 <view class="share-box" style='width:{{boxWidth}}rpx;height:{{boxHeight}}rpx;background:url("{{canvasData.url}}") bottom no-repeat; background-size: cover'>
   <view class="share-content">
-      <view class="draw-item" wx:for="{{drawList}}" wx:key="{{index}}">
+      <view class="draw-item" wx:for="{{drawList}}" wx:key="index">
         <block wx:if="{{item.type == 'image'}}">
           <image src="{{item.url}}" style="left: {{item.left}}rpx; top: {{item.top}}rpx; width: {{item.width}}rpx; height: {{item.height}}rpx; border-radius:{{item.shape == 'square'?0:'50%'}}"></image>
         </block>
@@ -10,23 +10,10 @@
             {{item.content}}
           </view>
         </block>
-        <!-- <view class="top-item">
-          <view class="info">
-            <image src="{{proxywxs.userAvatar(userInfo.avatarUrl)}}" />
-            <text class="username">{{userInfo.userName || '白山羊'}}</text>
-            <text class="tips">分享了一张图片</text>
-            <text class="album-name">{{albumInfo.albumName || '标题名称'}}</text>
-          </view>
-          <view class="qrcode">
-            <image src="{{qrcodeSrc}}" />
-            <text>长按识别小程序码浏览照片</text>
-          </view>
-        </view> -->
-        
-      </view>  
+      </view>
       <view class="share-btn">
-        <button catchtap="saveImage">{{canvasData.btnText}}</button>
-      </view>  
+        <button catchtap="saveImage" class="btn">{{canvasData.btnText}}</button>
+      </view>
   </view>
- <canvas canvas-id='image' style='position:absolute;top:0;left:-1000rpx;width:{{canvasData.width}}px;height:{{canvasData.height}}px;'></canvas>
+ <canvas  canvas-id='image' style='position:absolute;top:0;left:-1000rpx;width:{{canvasData.width}}px;height:{{canvasData.height}}px;'></canvas>
 </view>

@@ -5,7 +5,26 @@
 实现原理: 利用微信小程序canvas API把文字和图片进行合成，用wx.canvasToTempFilePath()返回图片地址再保存至相册。
 
 ### 如何使用
+##### 1、使用npm
++ 根目录执行
+```javascript
+yarn add mini-poster
+```
++ 开发者工具勾选使用npm，工具-》构建npm
++ 在页面json文件中引入
+```javascript
+{
+  "usingComponents": {
+    "share-image": "mini-poster/share_image/share_image"
+  }
+}
+```
++ 页面中使用
+```javascript
+  <share-image drawDataList="{{dataList}}"></share-image>
+```
 
+##### 2、拷贝组件
 > git clone 本组件。
 
 > 在待使用页面json文件中注册该组件。
@@ -21,7 +40,7 @@
 }
 
 .wxml 文件
-<share-image 
+<share-image
     drawDataList="{{dataList}}">
 </share-image>
 
@@ -81,7 +100,7 @@ canvas相关参数配置
 | comment    |  String  | '背景图'   |  否   |   图片描述  |
 | btnText    |  String  |  '保存至相册'  |  是  |   生成按钮文字  |
 
-> content 
+> content
 
 绘制内容参数
 

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "海报组建",
   "usingComponents": {
-    "share-image": "/components/share_image/share_image"
+    "share-image": "/components/share_image/share_image",
+    "share-image2": "mini-poster/share_image/share_image"
   }
 }

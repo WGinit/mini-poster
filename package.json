@@ -1,0 +1,24 @@
+{
+  "name": "mini-poster",
+  "version": "1.0.0",
+  "description": "------",
+  "main": "app.js",
+  "dependencies": {
+    "mini-poster": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WGinit/mini-poster.git"
+  },
+  "keywords": [],
+  "author": "wginit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WGinit/mini-poster/issues"
+  },
+  "homepage": "https://github.com/WGinit/mini-poster#readme"
+}

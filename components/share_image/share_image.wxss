@@ -15,7 +15,13 @@
 .draw-item image, .draw-item .text {
   position: absolute
 }
-.share-btn button {
+.share-btn {
+  position: fixed;
+  bottom: 20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.share-btn .btn {
   width: 100%;
   background: #FFFFFF;
   border-radius: 10rpx;
