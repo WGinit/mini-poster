@@ -1,4 +1,9 @@
 ## 微信小程序图片合成组件
+### 2023 更新：
+
+通过API接口传入wxml或html字符串，借用puppteer可实现截图生成海报, 解决canvas遗留问题和高度还原设计海报。
+
+Demo: [https://open.lihua1108.com/#/tools/screenhot](https://open.lihua1108.com/#/tools/screenhot)
 
 ------
 
